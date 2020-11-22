@@ -22,9 +22,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     SharedPreferences mContextSp;
-    static {
-        System.loadLibrary("native-lib");
-    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,46 +42,46 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        int proccessId = mContextSp.getInt( "processId", 0 );
-        if(proccessId > 0){
-            if (isProcessExist(this, proccessId)) {
-//                Process.killProcess(proccessId);
-                Log.i("Main", "服务  " + proccessId + "kill了");
-                //save processId
-                SharedPreferences.Editor editor = mContextSp.edit();
-                editor.putInt( "processId", 0);
-                editor.commit();
-                return;
-            }
-        }
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            startForegroundService(new Intent(this, ProcessService.class));
-//        } else {
-//            startService(new Intent(this, ProcessService.class));
+//        int proccessId = mContextSp.getInt( "processId", 0 );
+//        if(proccessId > 0){
+//            if (isProcessExist(this, proccessId)) {
+////                Process.killProcess(proccessId);
+//                Log.i("Main", "服务  " + proccessId + "kill了");
+//                //save processId
+//                SharedPreferences.Editor editor = mContextSp.edit();
+//                editor.putInt( "processId", 0);
+//                editor.commit();
+//                return;
+//            }
 //        }
 
-        startService(new Intent(this, TestService.class));
-    }
-
-    public static boolean isProcessExist(Context context, int pid) {
-
-        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningAppProcessInfo> lists ;
-        if (am != null) {
-            lists = am.getRunningAppProcesses();
-            for (ActivityManager.RunningAppProcessInfo appProcess : lists) {
-                if (appProcess.pid == pid) {
-                    Log.e("TAG","333333");
-                    return true;
-                }
-                else{
-                    Log.e("TAG","123123123");
-                }
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(new Intent(this, ProcessService.class));
+        } else {
+            startService(new Intent(this, ProcessService.class));
         }
-        return false;
+
+//        startService(new Intent(this, TestService.class));
     }
+
+//    public static boolean isProcessExist(Context context, int pid) {
+//
+//        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+//        List<ActivityManager.RunningAppProcessInfo> lists ;
+//        if (am != null) {
+//            lists = am.getRunningAppProcesses();
+//            for (ActivityManager.RunningAppProcessInfo appProcess : lists) {
+//                if (appProcess.pid == pid) {
+//                    Log.e("TAG","333333");
+//                    return true;
+//                }
+//                else{
+//                    Log.e("TAG","123123123");
+//                }
+//            }
+//        }
+//        return false;
+//    }
 
     @Override
     protected void onStart() {

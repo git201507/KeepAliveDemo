@@ -96,10 +96,10 @@ public class ProcessService extends Service {
                 }, 0, 1000 * 5);
 
 
-            Message msg = new Message();
-            msg.what = RESTART;
-            msg.arg1 = pid;
-            handler.sendMessageDelayed(msg, 3000);
+//            Message msg = new Message();
+//            msg.what = RESTART;
+//            msg.arg1 = pid;
+//            handler.sendMessageDelayed(msg, 3000);
 //        Intent dialogIntent = new Intent(getBaseContext(), MainActivity.class);
 //        dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //必须添加 Intent.FLAG_ACTIVITY_NEW_TASK
 //        getApplication().startActivity(dialogIntent);
